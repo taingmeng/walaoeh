@@ -7,10 +7,11 @@
 
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_timeline_stage_radius"
+        android:layout_height="@dimen/activity_timeline_stage_radius"
         android:text="New Button"
         android:layout_margin="10dp"
+        android:background="@drawable/round_button_complete"
         android:id="@+id/button" />
 
 </LinearLayout>
