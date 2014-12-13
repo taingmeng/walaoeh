@@ -182,6 +182,7 @@ public class Game extends Activity {
                 else{
                     tvMessage.setText("Wrong");
                     Log.d(TAG, "Wrong");
+                    endGame();
                 }
 
                 break;
@@ -193,6 +194,7 @@ public class Game extends Activity {
                 else{
                     tvMessage.setText("Wrong");
                     Log.d(TAG, "Wrong");
+                    endGame();
                 }
                 break;
 
@@ -223,30 +225,33 @@ public class Game extends Activity {
 
     }
     private void endGame(){
-        AlertDialog alert = new AlertDialog.Builder(this)
-                .setNegativeButton("Replay",new DialogInterface.OnClickListener() {
+        LayoutInflater mylayout = LayoutInflater.from(Game.this);
+        View dialogView = mylayout.inflate(R.layout.activity_end,null);
+
+        TextView stage = (TextView) dialogView.findViewById(R.id.stage);
+        //int test;
+        //test = Pref.getPlayerStage();
+        //String testName = Const.STAGE_NAME[test];
+        stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setNegativeButton("Replay",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //handle later
                         loadQuestion();
                     }
                 })
-                .setPositiveButton("Timeline",new DialogInterface.OnClickListener() {
+
+                .setPositiveButton("Back",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         onBackPressed();
                     }
-                }).create();
-
-
-        LayoutInflater mylayout = LayoutInflater.from(Game.this);
-        View dialogView = mylayout.inflate(R.layout.activity_end,null);
-
-        TextView stage = (TextView) dialogView.findViewById(R.id.stage);
-        stage.setText(Pref.getPlayerStage());
-        //set current stage
-
-        alert.setContentView(dialogView);
+                })
+                        .setView(dialogView)
+                        .show();
 
 
 
