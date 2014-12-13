@@ -1,8 +1,19 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/peter_river"
-    android:id="@+id/activity_timeline_layout" >
+    android:scrollbars="none"
+    android:layout_weight="1">
 
-</TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/peter_river"
+        android:stretchColumns="1"
+        android:gravity="center_horizontal"
+        android:id="@+id/activity_timeline_layout" >
+
+    </TableLayout>
+
+</ScrollView>

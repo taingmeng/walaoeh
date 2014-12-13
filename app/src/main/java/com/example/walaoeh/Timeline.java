@@ -2,6 +2,7 @@ package com.example.walaoeh;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,6 +47,7 @@ public class Timeline extends Activity {
             View stageLine = row.findViewById(R.id.stageLine);
 
             stageTextView.setText(Const.STAGE_NAME[stageIndex]);
+            stageButton.setClickable(false);
 
             if(stageIndex < stage) {
                 stageButton.setBackgroundResource(R.drawable.round_button_complete);
@@ -53,7 +55,18 @@ public class Timeline extends Activity {
             } else if(stageIndex == stage) {
                 stageButton.setBackgroundResource(R.drawable.round_button_progress);
                 double percentage = ((double)level/((double)Const.QUESTIONS[stage].length/2))*100;
+                stageButton.setClickable(true);
                 stageButton.setText(String.valueOf(level)+"%");
+
+                stageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Timeline.this, Game.class);
+                        startActivity(intent);
+                    }
+                });
+
+
             } else {
                 stageButton.setBackgroundResource(R.drawable.round_button_not_arrived);
                 stageButton.setText("??");

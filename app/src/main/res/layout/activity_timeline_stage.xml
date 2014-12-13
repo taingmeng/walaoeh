@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="-20dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/activity_timeline_stage_0"
         android:textColor="@color/white"
@@ -29,7 +29,6 @@
         android:id="@+id/stageLine"
         android:layout_width="10dp"
         android:layout_height="50dp"
-        android:background="@color/stage_completed"
-        android:layout_marginTop="-25dp"/>
+        android:background="@color/stage_completed"/>
 
 </LinearLayout>
