@@ -5,13 +5,30 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <View
+        android:id="@+id/stageLine"
+        android:layout_width="10dp"
+        android:layout_height="50dp"
+        android:background="@color/stage_completed"
+        android:layout_marginBottom="-25dp"/>
 
     <Button
         android:layout_width="@dimen/activity_timeline_stage_radius"
         android:layout_height="@dimen/activity_timeline_stage_radius"
-        android:text="New Button"
+        android:text="100%"
         android:layout_margin="10dp"
         android:background="@drawable/round_button_complete"
-        android:id="@+id/button" />
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:id="@+id/stageButton"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/activity_timeline_stage_0"
+        android:textColor="@color/white"
+        android:id="@+id/stageTextView" />
 
 </LinearLayout>

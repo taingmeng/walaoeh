@@ -12,4 +12,6 @@
     <string name="activity_main_title">Life Walao Eh!</string>
     <string name="title_activity_end_stage">endStage</string>
 
+    <string name="activity_timeline_stage_0">Stage 1: Elementary</string>
+
 </resources>
