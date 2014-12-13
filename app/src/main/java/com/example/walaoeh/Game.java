@@ -6,9 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -156,7 +153,7 @@ public class Game extends Activity {
         switch (playerStage){
             case Const.STAGE_ELEMENTARY:
                 tvQuestionLeft.setTextColor(getResources().getColor(R.color.black));
-                layout_left.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_left.setBackgroundResource(R.drawable.white_panel_background);
                 layout_left_boolean = true;
 
                 logic_sign.setVisibility(View.INVISIBLE);
@@ -178,11 +175,11 @@ public class Game extends Activity {
                 break;
             case Const.STAGE_HIGHSCHOOL:
                 tvQuestionLeft.setTextColor(getResources().getColor(R.color.black));
-                layout_left.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_left.setBackgroundResource(R.drawable.white_panel_background);
                 layout_left_boolean = true;
 
                 tvQuestionRight.setTextColor(getResources().getColor(R.color.black));
-                layout_right.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_right.setBackgroundResource(R.drawable.white_panel_background);
                 layout_right_boolean = true;
                 break;
             default:
@@ -274,10 +271,6 @@ public class Game extends Activity {
     private void winGame(){
         stopTimer = true;
 
-        if(playerStage == Pref.getPlayerStage()) {
-            playerStage++;
-            Pref.savePlayerStage(playerStage);
-        }
         //questionHandler.updateStage(playerStage);
 
         LayoutInflater mylayout = LayoutInflater.from(Game.this);
@@ -297,6 +290,11 @@ public class Game extends Activity {
         })
             .setView(dialogView)
             .show();
+
+        if(playerStage == Pref.getPlayerStage()) {
+            playerStage++;
+            Pref.savePlayerStage(playerStage);
+        }
 
     }
     private void endGame(){

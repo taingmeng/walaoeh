@@ -11,6 +11,7 @@
     <color name="emerald">#ff2ecc71</color>
     <color name="black">#ff000000</color>
     <color name="nephritis">#27ae60</color>
+    <color name="silver">#bdc3c7</color>
 
     <color name="stage_completed">#27ae60</color>
     <color name="stage_progress">#c0392b</color>

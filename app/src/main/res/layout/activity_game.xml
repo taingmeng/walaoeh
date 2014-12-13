@@ -7,19 +7,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:layout_margin="0dp"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@color/peter_river">
         <TextView
             android:id="@+id/tv_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
             android:textSize="50sp"
             android:textColor="@color/white"
-            android:text=""/>
+            android:text="0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_above="@+id/tv_stage"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/tv_help"
@@ -48,12 +51,14 @@
             android:id="@+id/tv_stage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:textStyle="italic"
             android:textColor="@color/white"
-            android:layout_margin="5dp"
-            android:text="Stage"/>
+            android:text="Stage"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/tv_help"
+            android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
