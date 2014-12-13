@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,7 +19,6 @@ import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
 import com.example.walaoeh.helper.QuestionHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -192,15 +190,15 @@ public class Game extends Activity {
         layout_right_boolean =  new Random().nextBoolean();
 
         if(layout_left_boolean){
-            layout_left.setBackgroundColor(getResources().getColor(R.color.color_true));
+            layout_left.setBackgroundResource(R.drawable.green_panel_background);
         }else{
-            layout_left.setBackgroundColor(getResources().getColor(R.color.color_false));
+            layout_left.setBackgroundResource(R.drawable.red_panel_background);
         }
 
         if(layout_right_boolean){
-            layout_right.setBackgroundColor(getResources().getColor(R.color.color_true));
+            layout_right.setBackgroundResource(R.drawable.green_panel_background);
         }else{
-            layout_right.setBackgroundColor(getResources().getColor(R.color.color_false));
+            layout_right.setBackgroundResource(R.drawable.red_panel_background);
         }
 
         layout_left.setVisibility(View.VISIBLE);
