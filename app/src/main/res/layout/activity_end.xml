@@ -49,7 +49,7 @@
 
             <TextView
 
-                android:text="TOM got stuck at "
+                android:text="TOM had crisis at "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"

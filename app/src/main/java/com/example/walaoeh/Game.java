@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
@@ -332,7 +333,7 @@ public class Game extends Activity {
         //questionHandler.updateStage(playerStage);
 
         LayoutInflater mylayout = LayoutInflater.from(Game.this);
-        View dialogView = mylayout.inflate(R.layout.activity_end_stage,null);
+        View dialogView = mylayout.inflate(R.layout.activity_end_stage, null);
 
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
         stage.setText(Const.STAGE_NAME[playerStage]);

@@ -1,6 +1,8 @@
 package com.example.walaoeh.helper;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,13 +23,13 @@ public class QuestionHandler {
         createQuestions();
     }
 
-    public QuestionHandler(int stage){
+    public QuestionHandler(Context context, int stage){
         initialize(stage);
         createQuestions();
     }
 
     private void createQuestions() {
-        for(int i=0; i<Const.QUESTIONS[stage].length; i++)
+        for (int i = 0; i < Const.QUESTIONS[stage].length; i++)
             questionList.add(i);
 
         Collections.shuffle(questionList);

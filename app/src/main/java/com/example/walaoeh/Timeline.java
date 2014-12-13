@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
@@ -85,6 +86,10 @@ public class Timeline extends Activity {
     private OnClickListener listener = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(((Integer) v.getTag())>=Const.STAGE_NAME.length){
+                Toast.makeText(Timeline.this, "This stage is not available yet. Stay tuned.", Toast.LENGTH_SHORT);
+                return;
+            }
             Intent intent = new Intent(Timeline.this, Game.class);
             intent.putExtra(Const.SELECT_STAGE_KEY, (Integer) v.getTag());
             startActivity(intent);
