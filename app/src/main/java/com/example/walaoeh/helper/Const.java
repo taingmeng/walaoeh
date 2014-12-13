@@ -31,4 +31,7 @@ public class Const {
             "Stage 4: College",
             "Stage 5: Work"
     };
+
+    public static final int LOGIC_TYPE_AND = 0;
+    public static final int LOGIC_TYPE_OR = 1;
 }
