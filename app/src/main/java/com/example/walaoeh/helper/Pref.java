@@ -21,8 +21,26 @@ public class Pref {
         return prefs.getInt(key, 0);
     }
 
+    public static int getPlayerStage() {
+        return prefs.getInt(Const.STAGE_KEY, 0);
+    }
+
+    public static int getPlayerLevel() {
+        return prefs.getInt(Const.LEVEL_KEY, 0);
+    }
+
     public static void savePlayerState(int stage, int level){
         editor.putInt(Const.STAGE_KEY, stage);
+        editor.putInt(Const.LEVEL_KEY, level);
+        editor.commit();
+    }
+
+    public static void savePlayerStage(int stage) {
+        editor.putInt(Const.STAGE_KEY, stage);
+        editor.commit();
+    }
+
+    public static void savePlayerLevel(int level) {
         editor.putInt(Const.LEVEL_KEY, level);
         editor.commit();
     }
