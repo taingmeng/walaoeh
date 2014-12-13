@@ -23,4 +23,12 @@ public class Const {
             {},
             {}
     };
+
+    public static final String[] STAGE_NAME = {
+            "Stage 1: Elementary",
+            "Stage 2: Secondary",
+            "Stage 3: High School",
+            "Stage 4: College",
+            "Stage 5: Work"
+    };
 }
