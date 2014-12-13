@@ -9,6 +9,8 @@ public class Const {
     public static final String STAGE_KEY = "com.example.walaoeh.const.stage_key";
     public static final String LEVEL_KEY = "com.example.walaoeh.const.stage_level";
 
+    public static final String SELECT_STAGE_KEY = "com.example.walaoeh.const.selected_stage_key";
+
     public static final int STAGE_ELEMENTARY = 0;
     public static final int STAGE_SECONDARY = 1;
     public static final int STAGE_HIGHSCHOOL = 2;

@@ -9,26 +9,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/activity_timeline_stage_0"
+        android:text="Elementary"
+        android:textSize="@dimen/door_textsize"
+        android:id="@+id/stageTextView"
+        android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:id="@+id/stageTextView" />
+        android:layout_marginTop="20dp"/>
 
-    <Button
-        android:layout_width="@dimen/activity_timeline_stage_radius"
-        android:layout_height="@dimen/activity_timeline_stage_radius"
-        android:text="100%"
-        android:layout_margin="10dp"
-        android:background="@drawable/round_button_complete"
-        android:textSize="22sp"
-        android:textColor="@color/white"
-        android:id="@+id/stageButton"/>
-
-    <View
-        android:id="@+id/stageLine"
-        android:layout_width="10dp"
-        android:layout_height="50dp"
-        android:background="@color/stage_completed"/>
+    <ImageButton
+        android:layout_width="@dimen/door_width"
+        android:layout_height="@dimen/door_height"
+        android:layout_marginTop="15dp"
+        android:id="@+id/doorImageButton"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

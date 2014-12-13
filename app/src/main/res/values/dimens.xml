@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="activity_timeline_stage_radius">80dp</dimen>
+    <dimen name="door_width">90dp</dimen>
+    <dimen name="door_height">120dp</dimen>
+    <dimen name="door_textsize">20sp</dimen>
+
 </resources>

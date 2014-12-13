@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -33,56 +34,55 @@ public class Timeline extends Activity {
         level = Pref.getPlayerLevel();
 
         TableLayout timelineLayout = (TableLayout) findViewById(R.id.activity_timeline_layout);
-        for(int stageIndex=0; stageIndex< Const.QUESTIONS[stage].length; stageIndex++){
+        int numRows = (stage < 9) ? 3 : (int)Math.ceil((float)stage/3);
+        int maxDoors = (stage < 9) ? 9 : stage;
+
+        int createdDoors = 0;
+
+        for(int stageIndex=0; stageIndex< numRows; stageIndex++){
 
             TableRow row= new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
 
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            inflater.inflate(R.layout.activity_timeline_stage, row);
+            for(int col=0; col<3; col++) {
 
-            TextView stageTextView = (TextView) row.findViewById(R.id.stageTextView);
-            Button stageButton = (Button) row.findViewById(R.id.stageButton);
-            View stageLine = row.findViewById(R.id.stageLine);
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View door = inflater.inflate(R.layout.activity_timeline_stage, null);
 
-            stageTextView.setText(Const.STAGE_NAME[stageIndex]);
-            stageButton.setClickable(false);
+                TextView stageTextView = (TextView) door.findViewById(R.id.stageTextView);
+                ImageButton doorImageButton = (ImageButton) door.findViewById(R.id.doorImageButton);
+                doorImageButton.setTag(createdDoors);
+                doorImageButton.setOnClickListener(listener);
 
-            if(stageIndex < stage) {
-                stageButton.setBackgroundResource(R.drawable.round_button_complete);
-                stageButton.setText("100%");
-            } else if(stageIndex == stage) {
-                stageButton.setBackgroundResource(R.drawable.round_button_progress);
-                double percentage = ((double)level/((double)Const.QUESTIONS[stage].length/2))*100;
-                stageButton.setClickable(true);
-                stageButton.setText(String.valueOf(level)+"%");
+                if (createdDoors < stage) {
+                    doorImageButton.setBackgroundResource(R.drawable.greendoor_pressed);
+                    stageTextView.setText("Stage " + String.valueOf(createdDoors));
+                } else if (createdDoors == stage) {
+                    doorImageButton.setBackgroundResource(R.drawable.bluedoor_pressed);
+                    stageTextView.setText("Stage " + String.valueOf(createdDoors));
+                } else {
+                    doorImageButton.setBackgroundResource(R.drawable.doorgrey);
+                    doorImageButton.setClickable(false);
+                    stageTextView.setText("??");
+                }
 
-                stageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Timeline.this, Game.class);
-                        startActivity(intent);
-                    }
-                });
-
-
-            } else {
-                stageButton.setBackgroundResource(R.drawable.round_button_not_arrived);
-                stageButton.setText("??");
-            }
-
-            if(stageIndex == Const.QUESTIONS[stage].length -1) {
-                stageLine.setVisibility(View.GONE);
-            } else if(stageIndex < stage) {
-                stageLine.setBackgroundColor(getResources().getColor(R.color.stage_completed));
-            } else {
-                stageLine.setBackgroundColor(getResources().getColor(R.color.stage_not_arrived));
+                row.addView(door);
+                createdDoors++;
+                if(createdDoors > maxDoors)
+                    break;
             }
 
             timelineLayout.addView(row, stageIndex);
         }
     }
+
+    private OnClickListener listener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Timeline.this, Game.class);
+            intent.putExtra(Const.SELECT_STAGE_KEY, (Integer) v.getTag());
+            startActivity(intent);
+        }
+    };
 
 
     @Override
