@@ -6,6 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/peter_river"
     tools:context=".Splash">
 
 
@@ -29,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Life  "
-                android:textSize="60sp"/>
+                android:textSize="60sp"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -54,6 +56,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="Crisis"
                         android:textSize="30dp"
+                        android:textColor="@color/white"
                         android:layout_marginBottom="10dp"/>
 
                 </RelativeLayout>
@@ -64,6 +67,8 @@
                     android:id="@+id/teamName"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="WALAO EH"
                     android:textSize="30sp"/>
 
