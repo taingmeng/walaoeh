@@ -1,7 +1,7 @@
 package com.example.walaoeh.helper;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 /**
  * Created by Sivly on 12/13/2014.
@@ -10,21 +10,30 @@ public class QuestionHandler {
 
     private final static int MAX_CHOOSE_QUESTIONS = 2;
 
-    private ArrayList<Integer> answeredList;
-    private Random random;
+    private ArrayList<Integer> questionList;
+    private int correctCounter;
     private int stage;
 
     public QuestionHandler() {
         initialize(Const.STAGE_ELEMENTARY);
+        createQuestions();
     }
 
     public QuestionHandler(int stage){
         initialize(stage);
+        createQuestions();
+    }
+
+    private void createQuestions() {
+        for(int i=0; i<Const.QUESTIONS[stage].length; i++)
+            questionList.add(i);
+
+        Collections.shuffle(questionList);
     }
 
     private void initialize() {
-        answeredList = new ArrayList<Integer>();
-        random = new Random();
+        questionList = new ArrayList<Integer>();
+        correctCounter = 0;
     }
 
     private void initialize(int stage) {
@@ -33,7 +42,7 @@ public class QuestionHandler {
     }
 
     public void updateStage(int stage){
-        answeredList.clear();
+        questionList.clear();
         this.stage = stage;
     }
 
@@ -43,21 +52,8 @@ public class QuestionHandler {
         int chooseQuestions = 0;
 
         while(chooseQuestions <= MAX_CHOOSE_QUESTIONS) {
-            int questionNumber = random.nextInt(Const.QUESTIONS[stage].length);
-
-            boolean getQuestion = true;
-
-            for(Integer number : answeredList)
-                if(questionNumber == number) {
-                    getQuestion = false;
-                    break;
-                }
-
-            if(getQuestion) {
-                chooseQuestions++;
-                answeredList.add(questionNumber);
-                questions.add(Const.QUESTIONS[stage][questionNumber]);
-            }
+            questions.add(Const.QUESTIONS[stage][correctCounter++]);
+            chooseQuestions++;
         }
 
         return questions;
