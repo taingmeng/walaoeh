@@ -55,6 +55,10 @@ public class Game extends Activity {
 
     private QuestionHandler questionHandler;
     private boolean stopTimer;
+    private boolean isPlaying;
+    private boolean exiting;
+
+    private AlertDialog pauseAlert;
 
 
     @Override
@@ -105,6 +109,8 @@ public class Game extends Activity {
 
         questionHandler = new QuestionHandler();
 
+        isPlaying = true;
+
         initTimer();
         resetVariables();
 
@@ -116,7 +122,7 @@ public class Game extends Activity {
         numberOfQuestions = 0;
         tvStage.setText(Const.STAGE_NAME[playerStage]);
         tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
-
+        isPlaying = true;
 
         loadQuestion();
     }
@@ -124,12 +130,17 @@ public class Game extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        stopTimer = Pref.getStopTimerState();
+        if((pauseAlert!= null && pauseAlert.isShowing()) || !isPlaying){
+            isPlaying = true;
+        }
+        else{
+            stopTimer=false;
+        }
     }
     @Override
     protected void onPause() {
+        stopTimer = true;
         super.onPause();
-        Pref.saveStopTimerState(stopTimer);
     }
     @Override
     protected void onDestroy() {
@@ -270,6 +281,7 @@ public class Game extends Activity {
     }
     private void winGame(){
         stopTimer = true;
+        isPlaying = false;
 
         //questionHandler.updateStage(playerStage);
 
@@ -284,7 +296,7 @@ public class Game extends Activity {
         builder.setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                onBackPressed();
+                finish();
                 dialog.dismiss();
             }
         })
@@ -299,6 +311,7 @@ public class Game extends Activity {
     }
     private void endGame(){
         stopTimer = true;
+        isPlaying = false;
 
         LayoutInflater mylayout = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
@@ -379,29 +392,38 @@ public class Game extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        pauseAlert();
-    }
-    private void pauseAlert(){
-        stopTimer = true;
-        AlertDialog.Builder builder = (new AlertDialog.Builder(this));
-        builder.setTitle("Game is paused").
-                setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        stopTimer=true;
-                        dialog.dismiss();
+        showPauseAlert();
 
-                    }
-                })
-                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        finish();
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+    }
+    private void showPauseAlert(){
+        stopTimer = true;
+        if(pauseAlert == null){
+            AlertDialog.Builder builder = (new AlertDialog.Builder(this));
+            builder.setTitle("Game is paused").
+                    setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            stopTimer=false;
+                            dialog.dismiss();
+
+                        }
+                    })
+                    .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            exiting = true;
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+            pauseAlert = builder.create();
+
+
+        }
+        if(!pauseAlert.isShowing()){
+            pauseAlert.show();
+        }
+
 
     }
 }
