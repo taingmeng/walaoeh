@@ -9,18 +9,4 @@ public class Const {
     public static final String STAGE_KEY = "com.example.walaoeh.const.stage_key";
     public static final String LEVEL_KEY = "com.example.walaoeh.const.stage_level";
 
-
-<<<<<<< HEAD
-=======
-    public static final String[][] QUESTIONS = {
-            {},
-            {},
-            {},
-            {},
-            {}
-    };
-
-
->>>>>>> parent of e8783a0... set questions
-
 }

@@ -70,12 +70,12 @@ public class Game extends Activity {
     private void setLogic(){
         int logicType = new Random().nextInt(1);
         switch (logicType){
-            case Const.LOGIC_TYPE_AND:
-                logic_sign.setImageResource(R.drawable.logic_and);
-                break;
-            case Const.LOGIC_TYPE_OR:
-                logic_sign.setImageResource(R.drawable.logic_or);
-                break;
+//            case Const.LOGIC_TYPE_AND:
+//                logic_sign.setImageResource(R.drawable.logic_and);
+//                break;
+//            case Const.LOGIC_TYPE_OR:
+//                logic_sign.setImageResource(R.drawable.logic_or);
+//                break;
 
         }
     }
