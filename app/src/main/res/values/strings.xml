@@ -9,6 +9,9 @@
     <string name="title_activity_game">Game</string>
     <string name="title_activity_end">End</string>
 
+    <string name="activity_main_play_button">Play</string>
+    <string name="activity_main_title">Life Walao Eh!</string>
+
 
 
 </resources>
