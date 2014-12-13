@@ -7,60 +7,60 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:gravity="center_vertical"
-    android:layout_gravity="center_vertical"
+    android:layout_gravity="center"
     android:background="@color/alizarin">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="4"
             android:gravity="center_vertical">
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:src="@drawable/poker_face"
                 android:layout_marginRight="10dp"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:text="OH NO!!"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:layout_marginBottom="20dp"
                 />
             <TextView
 
                 android:text="TOM got stuck at "
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/stage"
                 android:text="[to be filled]"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

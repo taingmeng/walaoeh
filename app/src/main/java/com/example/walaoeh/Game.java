@@ -2,6 +2,7 @@ package com.example.walaoeh;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -218,40 +219,37 @@ public class Game extends Activity {
             }
         });
         tvMessage.setAnimation(messageAnimation);
-        tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
+        tvScore.setText(numberOfQuestions + " / " + TOTAL_NUMBER_OF_QUESTIONS);
 
 
 
 
     }
     private void endGame(){
-        LayoutInflater mylayout = LayoutInflater.from(Game.this);
+        LayoutInflater mylayout = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
-
 
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
         stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView)
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setNegativeButton("Replay",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-//handle later
-                        loadQuestion();
-                    }
-                })
+        .setNegativeButton("Replay", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                loadQuestion();
+            }
+        })
 
-                .setPositiveButton("Back",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        onBackPressed();
-                    }
-                })
-                        .setView(dialogView)
-                        .create();
+        .setPositiveButton("Back", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                onBackPressed();
+            }
+        });
 
-        AlertDialog test = alert.show();
+        builder.create().show();
 
     }
 }
