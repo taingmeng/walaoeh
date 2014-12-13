@@ -2,11 +2,13 @@ package com.example.walaoeh;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class Splash extends Activity {
@@ -18,7 +20,8 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        ImageView logo = (ImageView) findViewById(R.id.logo);
+        TextView life = (TextView) findViewById(R.id.life);
 
 
 
@@ -35,9 +38,9 @@ public class Splash extends Activity {
                 // Start your app main activity
 
 
-                    Intent i = new Intent(Splash.this, Main.class);
-                    startActivity(i);
-                    finish();
+                Intent i = new Intent(Splash.this, Main.class);
+                startActivity(i);
+                finish();
 
             }
         }, SPLASH_TIME_OUT);
