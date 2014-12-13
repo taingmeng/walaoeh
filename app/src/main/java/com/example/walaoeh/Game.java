@@ -277,7 +277,7 @@ public class Game extends Activity {
         View dialogView = mylayout.inflate(R.layout.activity_end_stage,null);
 
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
-        stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+        stage.setText(Const.STAGE_NAME[playerStage]);
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -304,7 +304,7 @@ public class Game extends Activity {
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
 
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
-        stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+        stage.setText(Const.STAGE_NAME[playerStage]);
 
         AlertDialog.Builder builder = (new AlertDialog.Builder(this));
         builder.setView(dialogView)

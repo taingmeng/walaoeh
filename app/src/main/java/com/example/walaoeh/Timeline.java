@@ -33,6 +33,11 @@ public class Timeline extends Activity {
         stage = Pref.getPlayerStage();
         level = Pref.getPlayerLevel();
 
+        createTableLayout();
+    }
+
+    private void createTableLayout() {
+
         TableLayout timelineLayout = (TableLayout) findViewById(R.id.activity_timeline_layout);
         int numRows = (stage < 9) ? 3 : (int)Math.ceil((float)stage/3);
         int maxDoors = (stage < 9) ? 9 : stage;
@@ -90,6 +95,17 @@ public class Timeline extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.timeline, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        int stageLevel = Pref.getPlayerStage();
+        if(this.stage != stageLevel) {
+            this.stage = stageLevel;
+            createTableLayout();
+        }
     }
 
     @Override
