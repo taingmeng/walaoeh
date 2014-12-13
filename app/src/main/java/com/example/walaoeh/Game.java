@@ -1,9 +1,12 @@
 package com.example.walaoeh;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.walaoeh.helper.Const;
+import com.example.walaoeh.helper.Pref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,6 +217,37 @@ public class Game extends Activity {
         });
         tvMessage.setAnimation(messageAnimation);
         tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
+
+
+
+
+    }
+    private void endGame(){
+        AlertDialog alert = new AlertDialog.Builder(this)
+                .setNegativeButton("Replay",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+//handle later
+                        loadQuestion();
+                    }
+                })
+                .setPositiveButton("Timeline",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                }).create();
+
+
+        LayoutInflater mylayout = LayoutInflater.from(Game.this);
+        View dialogView = mylayout.inflate(R.layout.activity_end,null);
+
+        TextView stage = (TextView) dialogView.findViewById(R.id.stage);
+        stage.setText(Pref.getPlayerStage());
+        //set current stage
+
+        alert.setContentView(dialogView);
+
 
 
     }
