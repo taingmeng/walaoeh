@@ -27,11 +27,14 @@
         <activity
             android:name=".Game"
             android:label="@string/title_activity_game" >
-
         </activity>
         <activity
             android:name=".End"
             android:label="@string/title_activity_end" >
+        </activity>
+        <activity
+            android:name=".endStage"
+            android:label="@string/title_activity_end_stage" >
         </activity>
     </application>
 
