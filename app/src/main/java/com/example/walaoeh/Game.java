@@ -83,24 +83,6 @@ public class Game extends Activity {
             }
         });
 
-        helpButton = (ImageButton) findViewById(R.id.help_button);
-        helpImage = (ImageView) findViewById(R.id.helpImage);
-        createHelpSession();
-
-        helpImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer = false;
-                hideHelpSession();
-            }
-        });
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer=true;
-                showHelpSession();
-            }
-        });
 
         layout_left = (RelativeLayout)findViewById(R.id.layout_left);
         layout_right = (RelativeLayout)findViewById(R.id.layout_right);
@@ -118,7 +100,31 @@ public class Game extends Activity {
         logic_sign.setVisibility(View.INVISIBLE);
         tvMessage.setVisibility(View.INVISIBLE);
 
+        questionHandler = new QuestionHandler();
+
+        isPlaying = true;
+
         playerStage = getIntent().getIntExtra(Const.SELECT_STAGE_KEY, Pref.getPlayerStage());
+
+        initTimer();
+        resetVariables();
+
+        helpButton = (ImageButton) findViewById(R.id.help_button);
+        helpImage = (ImageView) findViewById(R.id.helpImage);
+        createHelpSession();
+
+        helpImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideHelpSession();
+            }
+        });
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelpSession();
+            }
+        });
 
         isFirstTime = Pref.getPlayerFirstTime();
         if((isFirstTime & (1 << playerStage)) == 0) {
@@ -127,14 +133,6 @@ public class Game extends Activity {
             isFirstTime = isFirstTime | (1 << playerStage);
             Pref.saveFirstTime(isFirstTime);
         }
-
-        questionHandler = new QuestionHandler();
-
-        isPlaying = true;
-
-        initTimer();
-        resetVariables();
-
 
     }
     private void resetVariables(){
@@ -266,6 +264,8 @@ public class Game extends Activity {
 
     private void createHelpSession() {
 
+        helpImage.setBackground(null);
+
         switch (playerStage){
             case Const.STAGE_ELEMENTARY:
                 helpImage.setBackgroundResource(R.drawable.help1);
@@ -277,7 +277,7 @@ public class Game extends Activity {
                 helpImage.setBackgroundResource(R.drawable.help3);
                 break;
             default:
-                helpImage.setBackgroundResource(R.drawable.help3);
+                helpImage.setBackground(null);
                 break;
         }
 
