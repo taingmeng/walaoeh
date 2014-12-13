@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,6 +59,7 @@ public class Game extends Activity {
     private boolean stopTimer;
     private boolean isPlaying;
     private boolean exiting;
+    private int isFirstTime;
 
     private AlertDialog pauseAlert;
 
@@ -83,7 +86,8 @@ public class Game extends Activity {
         tvHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                stopTimer=true;
+                createHelpSession();
             }
         });
 
@@ -98,8 +102,6 @@ public class Game extends Activity {
 
         tvScore = (TextView)findViewById(R.id.score);
 
-
-
         layout_left.setVisibility(View.INVISIBLE);
         layout_right.setVisibility(View.INVISIBLE);
         logic_sign.setVisibility(View.INVISIBLE);
@@ -107,13 +109,19 @@ public class Game extends Activity {
 
         playerStage = getIntent().getIntExtra(Const.SELECT_STAGE_KEY, Pref.getPlayerStage());
 
+        isFirstTime = Pref.getPlayerFirstTime();
+        if((isFirstTime & (1 << playerStage)) == 0) {
+            createHelpSession();
+            isFirstTime = isFirstTime | (1 << playerStage);
+            Pref.saveFirstTime(isFirstTime);
+        }
+
         questionHandler = new QuestionHandler();
 
         isPlaying = true;
 
         initTimer();
         resetVariables();
-
 
 
     }
@@ -236,6 +244,43 @@ public class Game extends Activity {
         layout_right.setVisibility(View.VISIBLE);
 
     }
+
+    private void createHelpSession() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ImageButton helpButton = new ImageButton(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        helpButton.setLayoutParams(lp);
+
+        switch (playerStage){
+            case Const.STAGE_ELEMENTARY:
+                helpButton.setBackgroundResource(R.drawable.help1);
+                break;
+            case Const.STAGE_SECONDARY:
+                helpButton.setBackgroundResource(R.drawable.help2);
+                break;
+            case Const.STAGE_HIGHSCHOOL:
+                helpButton.setBackgroundResource(R.drawable.help3);
+                break;
+            default:
+                helpButton.setBackgroundResource(R.drawable.help3);
+                break;
+        }
+
+        builder.setView(helpButton);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     private void checkAnswer(boolean playerAnswer){
         switch (logicType){
             case Const.LOGIC_TYPE_AND:

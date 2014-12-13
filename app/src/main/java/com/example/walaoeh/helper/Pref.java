@@ -29,6 +29,8 @@ public class Pref {
         return prefs.getInt(Const.LEVEL_KEY, 0);
     }
 
+    public static int getPlayerFirstTime() {return prefs.getInt(Const.FIRST_TIME_KEY, 0);}
+
     public static boolean getStopTimerState() {
         return prefs.getBoolean(Const.STOP_TIMER_STATE, false);
     }
@@ -54,7 +56,10 @@ public class Pref {
         editor.commit();
     }
 
-
+    public static void saveFirstTime(int visited) {
+        editor.putInt(Const.FIRST_TIME_KEY, visited);
+        editor.commit();
+    }
 
 
 }
