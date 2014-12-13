@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text="Life  "
-                android:textSize="60sp"
+                android:text="Life "
+                android:textSize="70sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
 
@@ -57,7 +57,7 @@
                         android:text="Crisis"
                         android:textSize="30dp"
                         android:textColor="@color/white"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="5dp"/>
 
                 </RelativeLayout>
 
