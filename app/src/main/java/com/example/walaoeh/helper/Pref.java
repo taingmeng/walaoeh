@@ -29,6 +29,10 @@ public class Pref {
         return prefs.getInt(Const.LEVEL_KEY, 0);
     }
 
+    public static boolean getStopTimerState() {
+        return prefs.getBoolean(Const.STOP_TIMER_STATE, false);
+    }
+
     public static void savePlayerState(int stage, int level){
         editor.putInt(Const.STAGE_KEY, stage);
         editor.putInt(Const.LEVEL_KEY, level);
@@ -42,6 +46,11 @@ public class Pref {
 
     public static void savePlayerLevel(int level) {
         editor.putInt(Const.LEVEL_KEY, level);
+        editor.commit();
+    }
+
+    public static void saveStopTimerState(boolean stopTimer) {
+        editor.putBoolean(Const.STOP_TIMER_STATE, stopTimer);
         editor.commit();
     }
 

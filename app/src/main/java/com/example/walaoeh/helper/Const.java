@@ -36,4 +36,6 @@ public class Const {
 
     public static final int LOGIC_TYPE_AND = 0;
     public static final int LOGIC_TYPE_OR = 1;
+
+    public static final String STOP_TIMER_STATE = "com.example.walaoeh.const.timer_state";
 }

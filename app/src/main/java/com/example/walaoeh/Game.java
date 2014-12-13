@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,10 +24,13 @@ import com.example.walaoeh.helper.QuestionHandler;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Game extends Activity {
     public static final String TAG = "Game Activity";
+    public static final long QUESTION_TIME=10*1000;
     private Button btn_true, btn_false;
     private RelativeLayout layout_left, layout_right;
     private ImageView logic_sign;
@@ -32,6 +38,9 @@ public class Game extends Activity {
 
     private int logicType;
     private CountDownTimer cdTimer;
+    private Timer questionTimer;
+    private TimerTask questionTimerTask;
+    private long remainingTime;
 
     private int playerStage;
 
@@ -95,10 +104,11 @@ public class Game extends Activity {
         logic_sign.setVisibility(View.INVISIBLE);
         tvMessage.setVisibility(View.INVISIBLE);
 
-        playerStage = Pref.getPlayerStage();
+        playerStage = getIntent().getIntExtra(Const.SELECT_STAGE_KEY, Pref.getPlayerStage());
 
         questionHandler = new QuestionHandler();
 
+        initTimer();
         resetVariables();
 
 
@@ -107,19 +117,32 @@ public class Game extends Activity {
     private void resetVariables(){
         questionHandler.updateStage(playerStage);
         numberOfQuestions = 0;
-        tvStage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+        tvStage.setText(Const.STAGE_NAME[playerStage]);
         tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
 
-        initTimer();
+
         loadQuestion();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        stopTimer = Pref.getStopTimerState();
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Pref.saveStopTimerState(stopTimer);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stoptimertask();
+    }
+
+
+
     private void loadQuestion(){
-        tvStage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
         List<String> questions = questionHandler.getQuestion();
         setLogic();
         setLayoutBoolean();
@@ -167,8 +190,8 @@ public class Game extends Activity {
                 tvQuestionRight.setTextColor(getResources().getColor(R.color.white));
                 break;
         }
-
-        cdTimer.start();
+        stopTimer = false;
+        remainingTime = QUESTION_TIME;
 
     }
     private void setLogic(){
@@ -249,10 +272,13 @@ public class Game extends Activity {
         tvScore.setText(numberOfQuestions + " / " + TOTAL_NUMBER_OF_QUESTIONS);
     }
     private void winGame(){
-        stopTimer=true;
-        playerStage++;
-        Pref.savePlayerStage(playerStage);
-        questionHandler.updateStage(playerStage);
+        stopTimer = true;
+
+        if(playerStage == Pref.getPlayerStage()) {
+            playerStage++;
+            Pref.savePlayerStage(playerStage);
+        }
+        //questionHandler.updateStage(playerStage);
 
         LayoutInflater mylayout = LayoutInflater.from(Game.this);
         View dialogView = mylayout.inflate(R.layout.activity_end_stage,null);
@@ -261,70 +287,123 @@ public class Game extends Activity {
         stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
 
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setNegativeButton("Next Level",new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    onBackPressed();
-                    //resetVariables();
-
-
-                }
-            })
-//            .setPositiveButton("Back",new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    onBackPressed();
-//                }
-//            })
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+                dialog.dismiss();
+            }
+        })
             .setView(dialogView)
-            .create();
-
-        AlertDialog test = alert.show();
+            .show();
 
     }
     private void endGame(){
         stopTimer = true;
+
         LayoutInflater mylayout = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
 
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
         stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = (new AlertDialog.Builder(this));
         builder.setView(dialogView)
         .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 resetVariables();
+                dialog.dismiss();
 
             }
         })
-        .setNegativeButton("Back", new DialogInterface.OnClickListener() {
+        .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                onBackPressed();
+                finish();
+                dialog.dismiss();
             }
-        });
-        builder.create().show();
+        })
+        .show();
 
     }
+
     private void initTimer(){
         stopTimer = false;
-        cdTimer = new CountDownTimer(11000,1000) {
+        remainingTime = QUESTION_TIME;
+
+        questionTimer = new Timer();
+        questionTimerTask = new TimerTask() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                tvTimer.setText(millisUntilFinished/1000-1+"");
-                if(stopTimer){
-                    this.cancel();
+            public void run() {
+                if(!stopTimer) {
+                    tvTimer.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvTimer.setText(remainingTime / 1000 + "");
+                            if (remainingTime == 0) {
+                                endGame();
+                            }
+                            remainingTime -= 1000;
+                        }
+                    });
+
+
+
                 }
             }
-            @Override
-            public void onFinish() {
-                endGame();
-            }
         };
+        questionTimer.scheduleAtFixedRate(questionTimerTask, 0, 1000);
+
+
+//        stopTimer = false;
+//        cdTimer = new CountDownTimer(11000,1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                tvTimer.setText(millisUntilFinished/1000-1+"");
+//                if(stopTimer){
+//                    this.cancel();
+//                }
+//            }
+//            @Override
+//            public void onFinish() {
+//                endGame();
+//            }
+//        };
+    }
+    public void stoptimertask() {
+        if (questionTimer != null) {
+            questionTimer.cancel();
+            questionTimer = null;
+        }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        pauseAlert();
+    }
+    private void pauseAlert(){
+        stopTimer = true;
+        AlertDialog.Builder builder = (new AlertDialog.Builder(this));
+        builder.setTitle("Game is paused").
+                setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        stopTimer=true;
+                        dialog.dismiss();
 
+                    }
+                })
+                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+    }
 }

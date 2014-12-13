@@ -19,7 +19,7 @@
             android:layout_margin="10dp"
             android:textSize="50sp"
             android:textColor="@color/white"
-            android:text="0"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/tv_help"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:textSize="10sp"
+            android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_margin="5dp"
             android:text="Stage"/>
