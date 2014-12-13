@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
+import com.example.walaoeh.helper.QuestionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,10 @@ public class Game extends Activity {
     private Button btn_true, btn_false;
     private RelativeLayout layout_left, layout_right;
     private ImageView logic_sign;
-    private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvHelp;
+    private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvHelp, tvStage;
 
     private int logicType;
     private CountDownTimer cdTimer;
-    private CountDownTimer openingTimer;
-
-
-    private List<String> questionList;
 
     private int playerStage;
 
@@ -51,6 +48,9 @@ public class Game extends Activity {
     private int numberOfQuestions=0;
 
     private Animation messageAnimation;
+
+    private QuestionHandler questionHandler;
+    private boolean stopTimer;
 
 
     @Override
@@ -86,37 +86,34 @@ public class Game extends Activity {
         tvQuestionLeft = (TextView)findViewById(R.id.tv_question_left);
         tvQuestionRight = (TextView)findViewById(R.id.tv_question_right);
         tvMessage = (TextView)findViewById(R.id.tv_message);
+        tvStage = (TextView)findViewById(R.id.tv_stage);
+
         tvScore = (TextView)findViewById(R.id.score);
-        tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
+
+
 
         layout_left.setVisibility(View.INVISIBLE);
         layout_right.setVisibility(View.INVISIBLE);
         logic_sign.setVisibility(View.INVISIBLE);
         tvMessage.setVisibility(View.INVISIBLE);
 
-        cdTimer = new CountDownTimer(11000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                tvTimer.setText(millisUntilFinished/1000-1+"");
-            }
+        playerStage = Pref.getPlayerStage();
 
-            @Override
-            public void onFinish() {
-                tvTimer.setText("0");
-                loadQuestion();
-            }
-        };
+        questionHandler = new QuestionHandler();
 
-        playerStage = 0;
+        resetVariables();
 
-        questionList = new ArrayList<String>();
-        for (String s: Const.QUESTIONS[playerStage]){
-            questionList.add(s);
-        }
+
+
+    }
+    private void resetVariables(){
+        questionHandler.updateStage(playerStage);
+        numberOfQuestions = 0;
+        tvStage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+        tvScore.setText(numberOfQuestions+" / "+TOTAL_NUMBER_OF_QUESTIONS);
+
+        initTimer();
         loadQuestion();
-
-
-
     }
 
     @Override
@@ -124,18 +121,55 @@ public class Game extends Activity {
         super.onResume();
     }
     private void loadQuestion(){
+        tvStage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
+        List<String> questions = questionHandler.getQuestion();
         setLogic();
         setLayoutBoolean();
-        int leftQuestion = new Random().nextInt(questionList.size());
-        int rightQuestion = new Random().nextInt(questionList.size());
-        while(rightQuestion == leftQuestion){
-            rightQuestion = new Random().nextInt(questionList.size());
-        }
-        tvQuestionLeft.setText(questionList.get(leftQuestion).substring(2));
-        tvQuestionRight.setText(questionList.get(rightQuestion).substring(2));
 
-        question_left_boolean = questionList.get(leftQuestion).charAt(0) == 1;
-        question_right_boolean = questionList.get(rightQuestion).charAt(0) == 1;
+        tvQuestionLeft.setText(questions.get(0).substring(2));
+        tvQuestionRight.setText(questions.get(1).substring(2));
+
+        question_left_boolean = String.valueOf(questions.get(0).charAt(0)).equals("1");
+        question_right_boolean = String.valueOf(questions.get(1).charAt(0)).equals("1");
+
+        switch (playerStage){
+            case Const.STAGE_ELEMENTARY:
+                tvQuestionLeft.setTextColor(getResources().getColor(R.color.black));
+                layout_left.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_left_boolean = true;
+
+                logic_sign.setVisibility(View.INVISIBLE);
+                logicType = Const.LOGIC_TYPE_AND;
+
+                layout_right.setVisibility(View.INVISIBLE);
+                layout_right_boolean = true;
+                question_right_boolean = true;
+                break;
+            case Const.STAGE_SECONDARY:
+                tvQuestionLeft.setTextColor(getResources().getColor(R.color.white));
+
+                logic_sign.setVisibility(View.INVISIBLE);
+                logicType = Const.LOGIC_TYPE_AND;
+
+                layout_right.setVisibility(View.INVISIBLE);
+                layout_right_boolean = true;
+                question_right_boolean = true;
+                break;
+            case Const.STAGE_HIGHSCHOOL:
+                tvQuestionLeft.setTextColor(getResources().getColor(R.color.black));
+                layout_left.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_left_boolean = true;
+
+                tvQuestionRight.setTextColor(getResources().getColor(R.color.black));
+                layout_right.setBackgroundColor(getResources().getColor(R.color.white));
+                layout_right_boolean = true;
+                break;
+            default:
+                tvQuestionLeft.setTextColor(getResources().getColor(R.color.white));
+                tvQuestionRight.setTextColor(getResources().getColor(R.color.white));
+                break;
+        }
+
         cdTimer.start();
 
     }
@@ -176,31 +210,21 @@ public class Game extends Activity {
     private void checkAnswer(boolean playerAnswer){
         switch (logicType){
             case Const.LOGIC_TYPE_AND:
-                if(((question_left_boolean | layout_left_boolean) && (question_right_boolean | layout_right_boolean)) == playerAnswer){
-                    tvMessage.setText("Correct");
-                    Log.d(TAG, "Correct");
-                }
-                else{
-                    tvMessage.setText("Wrong");
-                    Log.d(TAG, "Wrong");
+                if((!(question_left_boolean ^ layout_left_boolean) && !(question_right_boolean ^ layout_right_boolean)) != playerAnswer){
                     endGame();
+                    return;
                 }
-
                 break;
             case Const.LOGIC_TYPE_OR:
-                if(((question_left_boolean | layout_left_boolean) || (question_right_boolean | layout_right_boolean)) == playerAnswer){
-                    tvMessage.setText("Correct");
-                    Log.d(TAG, "Correct");
-                }
-                else{
-                    tvMessage.setText("Wrong");
-                    Log.d(TAG, "Wrong");
+                if((!(question_left_boolean ^ layout_left_boolean) || !(question_right_boolean ^ layout_right_boolean)) != playerAnswer){
                     endGame();
+                    return;
                 }
                 break;
 
         }
-        tvMessage.setVisibility(View.INVISIBLE);
+        tvMessage.setText("Correct");
+        numberOfQuestions++;
         Animation messageAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.point);
         messageAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -210,7 +234,12 @@ public class Game extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                loadQuestion();
+                if(numberOfQuestions==TOTAL_NUMBER_OF_QUESTIONS){
+                    winGame();
+
+                }else {
+                    loadQuestion();
+                }
             }
 
             @Override
@@ -220,12 +249,44 @@ public class Game extends Activity {
         });
         tvMessage.setAnimation(messageAnimation);
         tvScore.setText(numberOfQuestions + " / " + TOTAL_NUMBER_OF_QUESTIONS);
+    }
+    private void winGame(){
+        stopTimer=true;
+        playerStage++;
+        Pref.savePlayerStage(playerStage);
+        questionHandler.updateStage(playerStage);
+
+        LayoutInflater mylayout = LayoutInflater.from(Game.this);
+        View dialogView = mylayout.inflate(R.layout.activity_end_stage,null);
+
+        TextView stage = (TextView) dialogView.findViewById(R.id.stage);
+        stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
 
 
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setNegativeButton("Next Level",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    onBackPressed();
+                    //resetVariables();
 
+
+                }
+            })
+//            .setPositiveButton("Back",new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    onBackPressed();
+//                }
+//            })
+            .setView(dialogView)
+            .create();
+
+        AlertDialog test = alert.show();
 
     }
     private void endGame(){
+        stopTimer = true;
         LayoutInflater mylayout = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
 
@@ -234,22 +295,38 @@ public class Game extends Activity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView)
-
-        .setNegativeButton("Replay", new DialogInterface.OnClickListener(){
+        .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                loadQuestion();
+                resetVariables();
+
             }
         })
-
-        .setPositiveButton("Back", new DialogInterface.OnClickListener(){
+        .setNegativeButton("Back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 onBackPressed();
             }
         });
-
         builder.create().show();
 
     }
+    private void initTimer(){
+        stopTimer = false;
+        cdTimer = new CountDownTimer(11000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText(millisUntilFinished/1000-1+"");
+                if(stopTimer){
+                    this.cancel();
+                }
+            }
+            @Override
+            public void onFinish() {
+                endGame();
+            }
+        };
+    }
+
+
 }

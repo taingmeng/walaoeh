@@ -9,6 +9,7 @@
     <color name="alizarin">#e74c3c</color>
     <color name="pomegranate">#c0392b</color>
     <color name="emerald">#ff2ecc71</color>
+    <color name="black">#ff000000</color>
 
     <color name="stage_completed">#27ae60</color>
     <color name="stage_progress">#c0392b</color>

@@ -43,6 +43,17 @@
             android:layout_margin="5dp"
             android:text="0/10"/>
 
+        <TextView
+            android:id="@+id/tv_stage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="Stage"/>
+
         </RelativeLayout>
 
     <RelativeLayout
@@ -67,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:textSize="20sp"
                     android:textColor="@color/white"
                     android:text="Left Question"/>
@@ -85,6 +98,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/white"

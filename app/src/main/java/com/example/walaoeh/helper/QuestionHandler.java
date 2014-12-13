@@ -1,5 +1,7 @@
 package com.example.walaoeh.helper;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,6 +31,7 @@ public class QuestionHandler {
             questionList.add(i);
 
         Collections.shuffle(questionList);
+
     }
 
     private void initialize() {
@@ -42,17 +45,20 @@ public class QuestionHandler {
     }
 
     public void updateStage(int stage){
+        correctCounter=0;
         questionList.clear();
         this.stage = stage;
+        createQuestions();
     }
 
     public ArrayList<String> getQuestion() {
 
+
         ArrayList<String> questions = new ArrayList<String>();
         int chooseQuestions = 0;
 
-        while(chooseQuestions <= MAX_CHOOSE_QUESTIONS) {
-            questions.add(Const.QUESTIONS[stage][correctCounter++]);
+        while(chooseQuestions < MAX_CHOOSE_QUESTIONS) {
+            questions.add(Const.QUESTIONS[stage][questionList.get(correctCounter++)]);
             chooseQuestions++;
         }
 
