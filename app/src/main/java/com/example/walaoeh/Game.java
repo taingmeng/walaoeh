@@ -13,7 +13,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,7 +31,7 @@ public class Game extends Activity {
     public static final long QUESTION_TIME=10*1000;
     private Button btn_true, btn_false;
     private RelativeLayout layout_left, layout_right;
-    private ImageView logic_sign;
+    private ImageView logic_sign, helpImage;
     private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvStage;
     private ImageButton helpButton;
 
@@ -85,11 +84,21 @@ public class Game extends Activity {
         });
 
         helpButton = (ImageButton) findViewById(R.id.help_button);
+        helpImage = (ImageView) findViewById(R.id.helpImage);
+        createHelpSession();
+
+        helpImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopTimer = false;
+                hideHelpSession();
+            }
+        });
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer=true;
-                createHelpSession();
+                showHelpSession();
             }
         });
 
@@ -113,7 +122,7 @@ public class Game extends Activity {
 
         isFirstTime = Pref.getPlayerFirstTime();
         if((isFirstTime & (1 << playerStage)) == 0) {
-            createHelpSession();
+
             isFirstTime = isFirstTime | (1 << playerStage);
             Pref.saveFirstTime(isFirstTime);
         }
@@ -158,6 +167,13 @@ public class Game extends Activity {
         stoptimertask();
     }
 
+    private void hideHelpSession() {
+        helpImage.setVisibility(View.INVISIBLE);
+    }
+
+    private void showHelpSession() {
+        helpImage.setVisibility(View.VISIBLE);
+    }
 
 
     private void loadQuestion(){
@@ -249,37 +265,20 @@ public class Game extends Activity {
 
     private void createHelpSession() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        ImageButton helpButton = new ImageButton(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        helpButton.setLayoutParams(lp);
-
         switch (playerStage){
             case Const.STAGE_ELEMENTARY:
-                helpButton.setBackgroundResource(R.drawable.help1);
+                helpImage.setBackgroundResource(R.drawable.help1);
                 break;
             case Const.STAGE_SECONDARY:
-                helpButton.setBackgroundResource(R.drawable.help2);
+                helpImage.setBackgroundResource(R.drawable.help2);
                 break;
             case Const.STAGE_HIGHSCHOOL:
-                helpButton.setBackgroundResource(R.drawable.help3);
+                helpImage.setBackgroundResource(R.drawable.help3);
                 break;
             default:
-                helpButton.setBackgroundResource(R.drawable.help3);
+                helpImage.setBackgroundResource(R.drawable.help3);
                 break;
         }
-
-        builder.setView(helpButton);
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
 
     }
 
