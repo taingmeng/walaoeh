@@ -9,7 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:layout_margin="0dp"
-        android:padding="0dp"
+        android:padding="10dp"
         android:background="@color/peter_river">
         <TextView
             android:id="@+id/tv_timer"
@@ -143,6 +143,7 @@
             android:layout_margin="0dp"
             android:background="@drawable/custom_btn_false"
             android:textColor="@color/white"
+            android:textSize="25sp"
             android:text="False"/>
         <Button
             android:id="@+id/btn_true"
@@ -152,6 +153,7 @@
             android:layout_margin="0dp"
             android:background="@drawable/custom_btn_true"
             android:textColor="@color/white"
+            android:textSize="25sp"
             android:text="True"/>
 
     </LinearLayout>
