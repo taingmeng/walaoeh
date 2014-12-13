@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+
 public class Splash extends Activity {
 
     // Splash screen timer
@@ -17,6 +18,7 @@ public class Splash extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
 
 
 

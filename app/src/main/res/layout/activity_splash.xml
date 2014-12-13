@@ -57,6 +57,7 @@
                         android:layout_alignParentBottom="true"
                         android:text="Crisis"
                         android:textSize="30dp"
+                        android:textColor="@color/white"
                         android:layout_marginBottom="10dp"/>
 
                 </RelativeLayout>
@@ -67,6 +68,8 @@
                     android:id="@+id/teamName"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="WALAO EH"
                     android:textSize="30sp"/>
 
