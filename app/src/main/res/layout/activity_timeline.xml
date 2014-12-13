@@ -1,10 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:verticalScrollbarPosition="right"
     android:background="@color/peter_river"
     android:id="@+id/activity_timeline_layout" >
 
-</LinearLayout>
+</TableLayout>
