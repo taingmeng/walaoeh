@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,8 +7,19 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:gravity="center_vertical"
+    android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@color/alizarin">
+
+    <TextView
+        android:text="OH NO!!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,7 +30,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:gravity="center_vertical">
             <ImageView
                 android:layout_width="100dp"
@@ -32,18 +43,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:text="OH NO!!"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="40sp"
-                android:layout_marginBottom="20dp"
-                />
             <TextView
 
                 android:text="TOM got stuck at "
@@ -64,4 +67,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
