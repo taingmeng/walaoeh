@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
@@ -123,7 +122,8 @@ public class Game extends Activity {
 
         isFirstTime = Pref.getPlayerFirstTime();
         if((isFirstTime & (1 << playerStage)) == 0) {
-
+            showHelpSession();
+            stopTimer = true;
             isFirstTime = isFirstTime | (1 << playerStage);
             Pref.saveFirstTime(isFirstTime);
         }
