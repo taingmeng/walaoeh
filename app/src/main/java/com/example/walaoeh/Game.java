@@ -228,10 +228,8 @@ public class Game extends Activity {
         LayoutInflater mylayout = LayoutInflater.from(Game.this);
         View dialogView = mylayout.inflate(R.layout.activity_end,null);
 
+
         TextView stage = (TextView) dialogView.findViewById(R.id.stage);
-        //int test;
-        //test = Pref.getPlayerStage();
-        //String testName = Const.STAGE_NAME[test];
         stage.setText(Const.STAGE_NAME[Pref.getPlayerStage()]);
 
 
@@ -251,9 +249,9 @@ public class Game extends Activity {
                     }
                 })
                         .setView(dialogView)
-                        .show();
+                        .create();
 
-
+        AlertDialog test = alert.show();
 
     }
 }
