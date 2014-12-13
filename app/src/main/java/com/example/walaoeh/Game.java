@@ -4,33 +4,34 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 public class Game extends Activity {
+    private Button btn_true, btn_false, btn_help;
+    private RelativeLayout layout_left, layout_right;
+    private ImageView logic_sign;
+    private TextView tvTimer, tvScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        btn_true = (Button)findViewById(R.id.btn_true);
+        btn_false = (Button)findViewById(R.id.btn_false);
+        btn_help = (Button)findViewById(R.id.btn_help);
+
+        layout_left = (RelativeLayout)findViewById(R.id.layout_left);
+        layout_right = (RelativeLayout)findViewById(R.id.layout_right);
+
+        logic_sign = (ImageView)findViewById(R.id.logic_sign);
+        tvTimer = (TextView)findViewById(R.id.tv_timer);
+
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.game, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
