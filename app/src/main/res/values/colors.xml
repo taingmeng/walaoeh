@@ -5,4 +5,5 @@
     <color name="color_false">#ffff7777</color>
     <color name="color_false_pressed">#ffffcccc</color>
     <color name="peter_river">#ff3498db</color>
+    <color name="white">#ffffffff</color>
 </resources>
