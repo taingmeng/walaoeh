@@ -9,18 +9,18 @@ public class Const {
     public static final String STAGE_KEY = "com.example.walaoeh.const.stage_key";
     public static final String LEVEL_KEY = "com.example.walaoeh.const.stage_level";
 
-    public static final int STAGE_ELEMENTARY = 0;
-    public static final int STAGE_SECONDARY = 1;
-    public static final int STAGE_HIGHSCHOOL = 2;
-    public static final int STAGE_COLLEGE = 3;
-    public static final int STAGE_WORK = 4;
 
+<<<<<<< HEAD
+=======
     public static final String[][] QUESTIONS = {
-            {"1:1+1=2", "0:0>2", "1:6+8=14", "1:4+8=12", "1:21=7*3"},
-            {"0:-20 is more than 15", "0:2^2=2", "0:5+x=2 so x=3", "0:1+2+3+4+5=10", "1:2^2^2=8"},
-            {"1:111^2=112211", "1:3*4*5=60", "0:1.0-0.1=0.0", "0:1 apple for $3, 3 apples for $10, so I should buy 3 apples.",
-                "2000 is a leap year"},
+            {},
+            {},
+            {},
             {},
             {}
     };
+
+
+>>>>>>> parent of e8783a0... set questions
+
 }
