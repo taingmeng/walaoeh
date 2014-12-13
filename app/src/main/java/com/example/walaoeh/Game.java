@@ -33,7 +33,8 @@ public class Game extends Activity {
     private Button btn_true, btn_false;
     private RelativeLayout layout_left, layout_right;
     private ImageView logic_sign;
-    private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvHelp, tvStage;
+    private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvStage;
+    private ImageButton helpButton;
 
     private int logicType;
     private CountDownTimer cdTimer;
@@ -82,8 +83,9 @@ public class Game extends Activity {
                 checkAnswer(false);
             }
         });
-        tvHelp = (TextView)findViewById(R.id.tv_help);
-        tvHelp.setOnClickListener(new View.OnClickListener() {
+
+        helpButton = (ImageButton) findViewById(R.id.help_button);
+        helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer=true;

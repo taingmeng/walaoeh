@@ -23,6 +23,8 @@ public class Timeline extends Activity {
     private int stage;
     private int level;
 
+    TableLayout timelineLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class Timeline extends Activity {
 
     private void createTableLayout() {
 
-        TableLayout timelineLayout = (TableLayout) findViewById(R.id.activity_timeline_layout);
+        timelineLayout = (TableLayout) findViewById(R.id.activity_timeline_layout);
         int numRows = (stage < 9) ? 3 : (int)Math.ceil((float)stage/3);
         int maxDoors = (stage < 9) ? 9 : stage;
 
@@ -104,6 +106,7 @@ public class Timeline extends Activity {
         int stageLevel = Pref.getPlayerStage();
         if(this.stage != stageLevel) {
             this.stage = stageLevel;
+            timelineLayout.removeAllViews();
             createTableLayout();
         }
     }
