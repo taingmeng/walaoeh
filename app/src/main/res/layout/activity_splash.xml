@@ -1,33 +1,34 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="16dp"
+    android:orientation="vertical"
     android:background="@color/peter_river"
     tools:context=".Splash">
 
-
-
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_above="@+id/logo"
         android:gravity="bottom"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="bottom">
             <TextView
                 android:id="@+id/life"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="0dp"
                 android:gravity="right"
                 android:text="Life "
                 android:textSize="70sp"
@@ -35,8 +36,8 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1">
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -44,23 +45,16 @@
                 android:orientation="vertical"
                 android:gravity="bottom">
 
-                <RelativeLayout
+
+                <TextView
+                    android:id="@+id/crisis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2">
-
-                    <TextView
-                        android:id="@+id/crisis"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:text="Crisis"
-                        android:textSize="30dp"
-                        android:textColor="@color/white"
-                        android:layout_marginBottom="5dp"/>
-
-                </RelativeLayout>
-
+                    android:layout_alignParentBottom="true"
+                    android:text="Crisis"
+                    android:textSize="30dp"
+                    android:layout_marginBottom="-5dp"
+                    android:textColor="@color/white"/>
 
 
                 <TextView
@@ -70,6 +64,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:text="WALAO EH"
+                    android:layout_marginBottom="10dp"
                     android:textSize="30sp"/>
 
             </LinearLayout>
@@ -81,13 +76,12 @@
 
     </LinearLayout>
 
-
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/applogo"/>
 
-</RelativeLayout>
+</LinearLayout>
