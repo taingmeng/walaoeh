@@ -24,7 +24,7 @@ import java.util.concurrent.CountDownLatch;
 public class Splash extends Activity {
 
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 1560;
+    private static int SPLASH_TIME_OUT = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class Splash extends Activity {
             @Override
             public void onTick(long l) {
                 //current remaining time
-                progress.setProgress((int)(SPLASH_TIME_OUT-l)/15);
+                progress.setProgress((int)((SPLASH_TIME_OUT-l)/15)+30);
             }
 
             @Override
@@ -50,9 +50,11 @@ public class Splash extends Activity {
                 startActivity(i);
                 finish();
 
+
             }
         };
         timer.start();
+
 
 
 
