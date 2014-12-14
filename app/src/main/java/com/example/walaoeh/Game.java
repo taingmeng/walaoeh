@@ -282,7 +282,7 @@ public class Game extends Activity {
                 helpImage.setBackgroundResource(R.drawable.help3);
                 break;
             default:
-                helpImage.setBackground(null);
+                helpImage.setBackgroundResource(R.drawable.help);
                 break;
         }
 
