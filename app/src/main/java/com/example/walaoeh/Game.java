@@ -453,7 +453,7 @@ public class Game extends Activity {
         if(pauseAlert == null){
             AlertDialog.Builder builder = (new AlertDialog.Builder(this));
             builder.setTitle("Game is paused").
-                    setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             stopTimer=false;
@@ -461,7 +461,7 @@ public class Game extends Activity {
 
                         }
                     })
-                    .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("Back", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             exiting = true;
