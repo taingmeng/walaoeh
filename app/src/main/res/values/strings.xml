@@ -10,12 +10,9 @@
     <string name="title_activity_end">End</string>
     <string name="activity_main_play_button">Play</string>
     <string name="activity_main_title">
-        This is a story\n
-        about Tom, who has to\n
-        make decision at different\n
-        stages of life. A wrong decision\n
-        will put him in crisis. You are the\n
-        one who can help him.
+        Hi there! I am TOM.\n
+        My life is full of crisis\n
+        (T_T)
     </string>
     <string name="title_activity_end_stage">endStage</string>
 

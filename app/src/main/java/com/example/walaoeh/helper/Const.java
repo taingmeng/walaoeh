@@ -106,7 +106,15 @@ public class Const {
     public static final String STOP_TIMER_STATE = "com.example.walaoeh.const.timer_state";
 
     public static final String[] MAIN_MESSAGES = {
-        "This is a story\nabout Tom, who has to\nmake decision at different\nstages of life. A wrong decision\nwill put him in crisis. You are the\none who can help him.",
-        "Life is sometimes\nfull of surprises\nLife is sometimes\nfull of walao eh."
+        "Hi there! I am TOM.\nMy life is full of crisis\n (T_T)",
+        "HELP ME !!!\n\\(^o^)/",
+        "Walao eh!\n My life is in crisis!",
+        "Life is full of choices.\n Wrong ones lead to crisis.",
+        "Bad decision\n makes good come-back.",
+        "As we grow up,\n choices become\n more complicated.",
+        "The harder the crisis,\n the wiser you are.",
+        "Depending \non environment,\n a choice could be right or wrong.",
+        "Keep calm \nand rock on.\n",
+        "Life is short,\n so live it."
     };
 }
