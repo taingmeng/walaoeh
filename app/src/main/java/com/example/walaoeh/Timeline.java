@@ -47,8 +47,9 @@ public class Timeline extends Activity {
     private void createTableLayout() {
 
         timelineLayout = (TableLayout) findViewById(R.id.activity_timeline_layout);
-        int numRows = (stage < 9) ? 3 : (int)Math.ceil((float)stage/3);
-        int maxDoors = (stage < 9) ? 9 : stage;
+        int maxStage = Const.STAGE_NAME.length;
+        int numRows = (maxStage < 9) ? 3 : (int)Math.ceil((float)maxStage/3);
+        int maxDoors = (maxStage < 9) ? 9 : maxStage;
 
         int createdDoors = 0;
 
@@ -92,7 +93,7 @@ public class Timeline extends Activity {
         @Override
         public void onClick(View v) {
             if(((Integer) v.getTag())>=Const.STAGE_NAME.length){
-                Toast.makeText(Timeline.this, "This stage is not available yet. Stay tuned.", Toast.LENGTH_SHORT);
+                Toast.makeText(Timeline.this, "This stage is not available yet. Stay tuned.", Toast.LENGTH_SHORT).show();
                 return;
             }
             Intent intent = new Intent(Timeline.this, Game.class);
