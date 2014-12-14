@@ -469,9 +469,12 @@ public class Game extends Activity {
     private void showPauseAlert(){
         stopTimer = true;
         if(pauseAlert == null){
+            LayoutInflater mylayout = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View dialogView = mylayout.inflate(R.layout.dialog_pause,null);
+
             AlertDialog.Builder builder = (new AlertDialog.Builder(this));
-            builder.setTitle("Game is paused").
-                    setPositiveButton("Resume", new DialogInterface.OnClickListener() {
+            builder.setView(dialogView)
+                    .setPositiveButton("Resume", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             stopTimer=false;
