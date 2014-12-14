@@ -14,48 +14,34 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/alizarin">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <ImageView
+                android:id="@+id/walaoeh"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft = "20dp"
-                    android:layout_marginTop = "20dp"
-                    android:src="@drawable/sad1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/walaoeh"/>
+            <ImageView
+                android:id="@+id/tomImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentLeft="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sad1" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="TOM"
-                    android:id="@+id/nameTextView" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="is on an adventure!!" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Surprises lie within each door"/>
 
         <TableLayout
             android:layout_width="match_parent"

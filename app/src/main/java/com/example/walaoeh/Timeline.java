@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.example.walaoeh.helper.Const;
 import com.example.walaoeh.helper.Pref;
 
+import java.util.Random;
+
 
 public class Timeline extends Activity {
 
@@ -25,6 +28,7 @@ public class Timeline extends Activity {
     private int level;
 
     TableLayout timelineLayout;
+    ImageView tomImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class Timeline extends Activity {
         level = Pref.getPlayerLevel();
 
         createTableLayout();
+        tomImage = (ImageView)findViewById(R.id.tomImage);
     }
 
     private void createTableLayout() {
@@ -113,6 +118,19 @@ public class Timeline extends Activity {
             this.stage = stageLevel;
             timelineLayout.removeAllViews();
             createTableLayout();
+        }
+        //To randomly pick Tom image on header when activity is resumed
+        int tomInt = new Random().nextInt(3);
+        switch (tomInt){
+            case 0:
+                tomImage.setImageResource(R.drawable.sad1);
+                break;
+            case 1:
+                tomImage.setImageResource(R.drawable.happy);
+                break;
+            case 2:
+                tomImage.setImageResource(R.drawable.neutral);
+                break;
         }
     }
 

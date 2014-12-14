@@ -126,13 +126,7 @@ public class Game extends Activity {
             }
         });
 
-        isFirstTime = Pref.getPlayerFirstTime();
-        if((isFirstTime & (1 << playerStage)) == 0) {
-            showHelpSession();
-            stopTimer = true;
-            isFirstTime = isFirstTime | (1 << playerStage);
-            Pref.saveFirstTime(isFirstTime);
-        }
+
 
     }
 
@@ -156,14 +150,14 @@ public class Game extends Activity {
         else{
             stopTimer=false;
         }
-
         isFirstTime = Pref.getPlayerFirstTime();
-        if((isFirstTime & (1 << playerStage)) == 0) {
-            stopTimer = true;
+        if(((isFirstTime & (1 << playerStage)) == 0) && playerStage <= Const.STAGE_HIGHSCHOOL) {
             showHelpSession();
+            stopTimer = true;
             isFirstTime = isFirstTime | (1 << playerStage);
             Pref.saveFirstTime(isFirstTime);
         }
+
     }
     @Override
     protected void onPause() {
@@ -177,6 +171,7 @@ public class Game extends Activity {
     }
 
     private void hideHelpSession() {
+        stopTimer = false;
         helpImage.setVisibility(View.INVISIBLE);
     }
 
@@ -350,7 +345,8 @@ public class Game extends Activity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
+        builder.setCancelable(false)
+                .setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
@@ -377,7 +373,8 @@ public class Game extends Activity {
         stage.setText(Const.STAGE_NAME[playerStage]);
 
         AlertDialog.Builder builder = (new AlertDialog.Builder(this));
-        builder.setView(dialogView)
+        builder.setCancelable(false)
+                .setView(dialogView)
         .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -398,7 +395,6 @@ public class Game extends Activity {
     }
 
     private void initTimer(){
-        stopTimer = false;
         remainingTime = QUESTION_TIME;
 
         questionTimer = new Timer();

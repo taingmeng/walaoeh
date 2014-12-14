@@ -9,7 +9,14 @@
     <string name="title_activity_game">Game</string>
     <string name="title_activity_end">End</string>
     <string name="activity_main_play_button">Play</string>
-    <string name="activity_main_title">Life Walao Eh!</string>
+    <string name="activity_main_title">
+        This is a story\n
+        about Tom, who has to\n
+        make decision at different\n
+        stages of life. A wrong decision\n
+        will put him in crisis. You are the\n
+        one who can help him.
+    </string>
     <string name="title_activity_end_stage">endStage</string>
 
     <string name="activity_timeline_stage_0">Stage 1: Elementary</string>
