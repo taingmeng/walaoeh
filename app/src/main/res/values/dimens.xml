@@ -6,6 +6,9 @@
     <dimen name="activity_timeline_stage_radius">80dp</dimen>
     <dimen name="door_width">90dp</dimen>
     <dimen name="door_height">120dp</dimen>
-    <dimen name="door_textsize">20sp</dimen>
+    <dimen name="door_tag_width">100dp</dimen>
+    <dimen name="door_tag_height">30dp</dimen>
+
+    <dimen name="door_textsize">15sp</dimen>
 
 </resources>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -56,12 +57,17 @@ public class Timeline extends Activity {
         for(int stageIndex=0; stageIndex< numRows; stageIndex++){
 
             TableRow row= new TableRow(this);
+            TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.MATCH_PARENT);
+            lp.topMargin = 30;
+            row.setLayoutParams(lp);
 
             for(int col=0; col<3; col++) {
 
                 LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View door = inflater.inflate(R.layout.activity_timeline_stage, null);
 
+                RelativeLayout doorTag = (RelativeLayout) door.findViewById(R.id.doorTag);
                 TextView stageTextView = (TextView) door.findViewById(R.id.stageTextView);
                 ImageButton doorImageButton = (ImageButton) door.findViewById(R.id.doorImageButton);
                 doorImageButton.setTag(createdDoors);
@@ -70,11 +76,14 @@ public class Timeline extends Activity {
                 if (createdDoors < stage) {
                     doorImageButton.setBackgroundResource(R.drawable.greendoor_pressed);
                     stageTextView.setText("Stage " + String.valueOf(createdDoors+1));
+                    doorTag.setBackgroundResource(R.drawable.taggreen);
                 } else if (createdDoors == stage) {
                     doorImageButton.setBackgroundResource(R.drawable.bluedoor_pressed);
                     stageTextView.setText("Stage " + String.valueOf(createdDoors+1));
+                    doorTag.setBackgroundResource(R.drawable.tagblue);
                 } else {
                     doorImageButton.setBackgroundResource(R.drawable.doorgrey);
+                    doorTag.setBackgroundResource(R.drawable.taggrey);
                     doorImageButton.setClickable(false);
                     stageTextView.setText("??");
                 }

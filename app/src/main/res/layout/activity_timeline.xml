@@ -52,6 +52,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
             android:id="@+id/activity_timeline_layout" >
 
         </TableLayout>

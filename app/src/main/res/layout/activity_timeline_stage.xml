@@ -6,20 +6,28 @@
     android:layout_gravity="center_horizontal"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Elementary"
-        android:textSize="@dimen/door_textsize"
-        android:id="@+id/stageTextView"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"/>
+    <RelativeLayout
+        android:layout_width="@dimen/door_tag_width"
+        android:layout_height="@dimen/door_tag_height"
+        android:id="@+id/doorTag"
+        android:background="@drawable/taggreen"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elementary"
+            android:textSize="@dimen/door_textsize"
+            android:id="@+id/stageTextView"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <ImageButton
         android:layout_width="@dimen/door_width"
         android:layout_height="@dimen/door_height"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="0dp"
         android:id="@+id/doorImageButton"
         android:layout_gravity="center_horizontal" />
 
