@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.easyandroidanimations.library.Animation;
 import com.easyandroidanimations.library.AnimationListener;
+import com.easyandroidanimations.library.FadeInAnimation;
 import com.easyandroidanimations.library.FadeOutAnimation;
 import com.example.walaoeh.helper.Const;
 
@@ -25,7 +26,7 @@ public class Main extends Activity {
 
     private int minutes = 0;
 
-    private int MAXIMUM_TIME = 3*1000;
+    private int MAXIMUM_TIME = 5*1000;
 
     private TextView dialogTextView;
 
@@ -66,11 +67,22 @@ public class Main extends Activity {
                         public void run() {
 
                             new FadeOutAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
+
                                 @Override
                                 public void onAnimationEnd(Animation animation) {
-                                    dialogTextView.setText(Const.MAIN_MESSAGES[runningIndex]);
+
+                                    dialogTextView.setText("");
+
+                                    new FadeInAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
+                                        @Override
+                                        public void onAnimationEnd(Animation animation) {
+                                            dialogTextView.setText(Const.MAIN_MESSAGES[runningIndex]);
+                                        }
+                                    }).animate();
                                 }
+
                             }).animate();
+
 
                         }
                     });
