@@ -7,8 +7,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.easyandroidanimations.library.Animation;
+import com.easyandroidanimations.library.AnimationListener;
+import com.easyandroidanimations.library.FadeOutAnimation;
+import com.example.walaoeh.helper.Const;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends Activity {
+
+    private int runningIndex = 0;
+    private Timer timer;
+    private TimerTask task;
+
+    private int minutes = 0;
+
+    private int MAXIMUM_TIME = 3*1000;
+
+    private TextView dialogTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +44,43 @@ public class Main extends Activity {
             }
         });
 
+        dialogTextView = (TextView) findViewById(R.id.dialogTextView);
+        initializeTimer();
+
+    }
+
+    private void initializeTimer() {
+
+        timer = new Timer();
+        task = new TimerTask(){
+            @Override
+            public void run() {
+                minutes += 1000;
+
+                if(minutes >= MAXIMUM_TIME) {
+                    minutes = 0;
+                    runningIndex = (runningIndex + 1)% Const.MAIN_MESSAGES.length;
+
+                    new FadeOutAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            dialogTextView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialogTextView.setText(Const.MAIN_MESSAGES[runningIndex]);
+                                }
+                            });
+                        }
+                    }).animate();
+
+
+
+
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
 

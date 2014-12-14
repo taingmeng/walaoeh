@@ -40,4 +40,9 @@ public class Const {
     public static final int LOGIC_TYPE_OR = 1;
 
     public static final String STOP_TIMER_STATE = "com.example.walaoeh.const.timer_state";
+
+    public static final String[] MAIN_MESSAGES = {
+        "This is a story\nabout Tom, who has to\nmake decision at different\nstages of life. A wrong decision\nwill put him in crisis. You are the\none who can help him.",
+        "Life is sometimes\nfull of surprises\nLife is sometimes\nfull of walao eh."
+    };
 }
