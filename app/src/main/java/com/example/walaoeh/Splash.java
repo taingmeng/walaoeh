@@ -56,40 +56,6 @@ public class Splash extends Activity {
         timer.start();
 
 
-
-
-/*
-        new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-/*
-            @Override
-            public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                //crisis.setPaintFlags(crisis.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                /*new FadeInAnimation(teamName).setDuration(500).setListener(new AnimationListener() {
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        try{
-                            Thread.sleep(1000);
-                        }catch (InterruptedException e){
-
-                        }
-
-                    }
-                }).animate();
-
- */
-/*
-
-            }
-        }, SPLASH_TIME_OUT);
-
- */
     }
 
 
