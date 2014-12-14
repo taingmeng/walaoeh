@@ -57,25 +57,23 @@ public class Main extends Activity {
             public void run() {
                 minutes += 1000;
 
-                if(minutes >= MAXIMUM_TIME) {
+                if (minutes >= MAXIMUM_TIME) {
                     minutes = 0;
-                    runningIndex = (runningIndex + 1)% Const.MAIN_MESSAGES.length;
+                    runningIndex = (runningIndex + 1) % Const.MAIN_MESSAGES.length;
 
-                    new FadeOutAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
+                    dialogTextView.post(new Runnable() {
                         @Override
-                        public void onAnimationEnd(Animation animation) {
-                            dialogTextView.post(new Runnable() {
+                        public void run() {
+
+                            new FadeOutAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
                                 @Override
-                                public void run() {
+                                public void onAnimationEnd(Animation animation) {
                                     dialogTextView.setText(Const.MAIN_MESSAGES[runningIndex]);
                                 }
-                            });
+                            }).animate();
+
                         }
-                    }).animate();
-
-
-
-
+                    });
                 }
             }
         };
