@@ -4,11 +4,12 @@
     android:layout_height="wrap_content"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:layout_marginTop="0dp"
     android:background="@color/alizarin">
 
     <TextView
@@ -18,7 +19,6 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
         />
 
     <LinearLayout
