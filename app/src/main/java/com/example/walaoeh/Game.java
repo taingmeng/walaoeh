@@ -135,6 +135,8 @@ public class Game extends Activity {
         }
 
     }
+
+
     private void resetVariables(){
         questionHandler.updateStage(playerStage);
         numberOfQuestions = 0;
@@ -153,6 +155,14 @@ public class Game extends Activity {
         }
         else{
             stopTimer=false;
+        }
+
+        isFirstTime = Pref.getPlayerFirstTime();
+        if((isFirstTime & (1 << playerStage)) == 0) {
+            stopTimer = true;
+            showHelpSession();
+            isFirstTime = isFirstTime | (1 << playerStage);
+            Pref.saveFirstTime(isFirstTime);
         }
     }
     @Override

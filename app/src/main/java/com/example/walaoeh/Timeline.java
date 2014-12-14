@@ -63,10 +63,10 @@ public class Timeline extends Activity {
 
                 if (createdDoors < stage) {
                     doorImageButton.setBackgroundResource(R.drawable.greendoor_pressed);
-                    stageTextView.setText("Stage " + String.valueOf(createdDoors));
+                    stageTextView.setText("Stage " + String.valueOf(createdDoors+1));
                 } else if (createdDoors == stage) {
                     doorImageButton.setBackgroundResource(R.drawable.bluedoor_pressed);
-                    stageTextView.setText("Stage " + String.valueOf(createdDoors));
+                    stageTextView.setText("Stage " + String.valueOf(createdDoors+1));
                 } else {
                     doorImageButton.setBackgroundResource(R.drawable.doorgrey);
                     doorImageButton.setClickable(false);

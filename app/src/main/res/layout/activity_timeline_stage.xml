@@ -13,7 +13,7 @@
         android:textSize="@dimen/door_textsize"
         android:id="@+id/stageTextView"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="20dp"/>
 
     <ImageButton
