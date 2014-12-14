@@ -304,8 +304,26 @@ public class Game extends Activity {
                 break;
 
         }
-        tvMessage.setText("Correct");
+
         numberOfQuestions++;
+        switch (numberOfQuestions){
+            case 1:
+                tvMessage.setText("Correct");
+                break;
+            case 2:
+                tvMessage.setText("Awesome");
+                break;
+            case 3:
+                tvMessage.setText("Excellent");
+                break;
+            case 4:
+                tvMessage.setText("Almost There");
+                break;
+            case 5:
+                tvMessage.setText("Congratulation");
+                break;
+        }
+
         Animation messageAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.point);
         messageAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -383,7 +401,7 @@ public class Game extends Activity {
 
             }
         })
-        .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+        .setNegativeButton("Back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 finish();
