@@ -9,14 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="55dp"
         android:text="@string/activity_main_title"
         android:textStyle="italic"
         android:id="@+id/dialogTextView"
         android:textColor="@color/black"
-        android:layout_below="@+id/activity_mainPlayButton"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_below="@+id/authFragment"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,5 +28,15 @@
 
         android:background="@drawable/positive_button"
         android:id="@+id/activity_mainPlayButton" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.example.walaoeh.FacebookLoginFragment"
+        android:id="@+id/authFragment"
+        android:layout_below="@+id/activity_mainPlayButton"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom = "20dp"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

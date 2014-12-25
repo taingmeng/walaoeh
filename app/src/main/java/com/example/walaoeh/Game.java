@@ -34,6 +34,7 @@ public class Game extends Activity {
     private ImageView logic_sign, helpImage;
     private TextView tvTimer, tvScore, tvQuestionLeft, tvQuestionRight, tvMessage, tvStage;
     private ImageButton helpButton;
+    private Random random;
 
     private int logicType;
     private CountDownTimer cdTimer;
@@ -106,6 +107,8 @@ public class Game extends Activity {
 
         playerStage = getIntent().getIntExtra(Const.SELECT_STAGE_KEY, Pref.getPlayerStage());
 
+        random = new Random();
+
         initTimer();
         resetVariables();
 
@@ -125,9 +128,6 @@ public class Game extends Activity {
                 showHelpSession();
             }
         });
-
-
-
     }
 
 
@@ -233,7 +233,7 @@ public class Game extends Activity {
 
     }
     private void setLogic(){
-        logicType = new Random().nextBoolean()?0:1;
+        logicType = random.nextBoolean()?0:1;
         switch (logicType){
             case Const.LOGIC_TYPE_AND:
                 logic_sign.setImageResource(R.drawable.logic_and);
@@ -247,8 +247,8 @@ public class Game extends Activity {
     }
     private void setLayoutBoolean(){
 
-        layout_left_boolean = new Random().nextBoolean();
-        layout_right_boolean =  new Random().nextBoolean();
+        layout_left_boolean = random.nextBoolean();
+        layout_right_boolean =  random.nextBoolean();
 
         if(layout_left_boolean){
             layout_left.setBackgroundResource(R.drawable.green_panel_background);

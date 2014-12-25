@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.walaoeh" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -33,16 +35,15 @@
             android:name=".Game"
             android:label="@string/title_activity_game"
             android:screenOrientation="portrait">
+        </activity>
 
-        </activity>
         <activity
-            android:name=".End"
-            android:label="@string/title_activity_end" >
+            android:name="com.facebook.LoginActivity"
+            android:label="title_facebook_login" >
         </activity>
-        <activity
-            android:name=".endStage"
-            android:label="@string/title_activity_end_stage" >
-        </activity>
+
+        <meta-data android:value="@string/facebook_app_id" android:name="com.facebook.sdk.ApplicationId"/>
+
     </application>
 
 </manifest>

@@ -1,8 +1,8 @@
 package com.example.walaoeh;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.example.walaoeh.helper.Const;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Main extends Activity {
+public class Main extends FragmentActivity {
 
     private int runningIndex = 0;
     private Timer timer;
@@ -28,12 +28,24 @@ public class Main extends Activity {
 
     private int MAXIMUM_TIME = 5*1000;
 
+    FacebookLoginFragment loginFragment;
+
     private TextView dialogTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(savedInstanceState == null) {
+           loginFragment = new FacebookLoginFragment();
+            getSupportFragmentManager()
+                    .beginTransaction().add(R.id.authFragment, loginFragment).commit();
+        } else {
+            loginFragment = (FacebookLoginFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.authFragment);
+        }
+
 
         Button playButton = (Button) findViewById(R.id.activity_mainPlayButton);
         playButton.setOnClickListener(new View.OnClickListener() {
