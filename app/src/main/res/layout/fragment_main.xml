@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainscreen">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/activity_main_title"
+        android:textStyle="italic"
+        android:id="@+id/dialogTextView"
+        android:textColor="@color/black"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:layout_below="@+id/activity_mainPlayButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_main_play_button"
+        android:layout_marginTop = "100dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_centerInParent="true"
+
+        android:background="@drawable/positive_button"
+        android:id="@+id/activity_mainPlayButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuSlideIcon"
+        android:layout_marginLeft = "5dp"
+        android:layout_marginTop = "5dp"
+        android:src="@drawable/ic_menu_friendslist"
+        android:background="@android:color/transparent"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>

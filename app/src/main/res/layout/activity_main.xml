@@ -1,42 +1,21 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SlidingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slidingPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainscreen"
     tools:context="com.example.walaoeh.Main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/activity_main_title"
-        android:textStyle="italic"
-        android:id="@+id/dialogTextView"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_below="@+id/authFragment"
-        android:layout_centerHorizontal="true" />
+    <FrameLayout
+        android:id="@+id/leftPane"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_play_button"
-        android:layout_marginTop = "100dp"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_centerInParent="true"
+    <FrameLayout
+        android:id="@+id/mainPane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right" />
 
-        android:background="@drawable/positive_button"
-        android:id="@+id/activity_mainPlayButton" />
-
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.example.walaoeh.FacebookLoginFragment"
-        android:id="@+id/authFragment"
-        android:layout_below="@+id/activity_mainPlayButton"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom = "20dp"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+</android.support.v4.widget.SlidingPaneLayout>

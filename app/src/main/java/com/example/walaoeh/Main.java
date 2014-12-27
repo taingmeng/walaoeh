@@ -1,127 +1,75 @@
 package com.example.walaoeh;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.Window;
 
-import com.easyandroidanimations.library.Animation;
-import com.easyandroidanimations.library.AnimationListener;
-import com.easyandroidanimations.library.FadeInAnimation;
-import com.easyandroidanimations.library.FadeOutAnimation;
-import com.example.walaoeh.helper.Const;
+import com.example.walaoeh.helper.Pref;
+import com.example.walaoeh.mainfragments.MainFragment;
+import com.example.walaoeh.mainfragments.SignoutFragment;
 
-import java.util.Timer;
-import java.util.TimerTask;
+public class Main extends FragmentActivity
+     implements MainFragment.SlidePanelButtonPressed{
 
-public class Main extends FragmentActivity {
-
-    private int runningIndex = 0;
-    private Timer timer;
-    private TimerTask task;
-
-    private int minutes = 0;
-
-    private int MAXIMUM_TIME = 5*1000;
-
-    FacebookLoginFragment loginFragment;
-
-    private TextView dialogTextView;
+    SlidingPaneLayout slidePanel;
+    SignoutFragment signoutFragment;
+    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
 
+        slidePanel = (SlidingPaneLayout) findViewById(R.id.slidingPanel);
+        FragmentManager fm = getSupportFragmentManager();
         if(savedInstanceState == null) {
-           loginFragment = new FacebookLoginFragment();
-            getSupportFragmentManager()
-                    .beginTransaction().add(R.id.authFragment, loginFragment).commit();
+            FragmentTransaction ft = fm.beginTransaction();
+            mainFragment = new MainFragment();
+            signoutFragment = SignoutFragment.newInstance(Pref.getPlayerStage());
+
+            ft.add(R.id.leftPane, signoutFragment);
+            ft.add(R.id.mainPane, mainFragment);
+
+            ft.commit();
+
         } else {
-            loginFragment = (FacebookLoginFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.authFragment);
+            signoutFragment = (SignoutFragment) fm.findFragmentById(R.id.leftPane);
+            mainFragment = (MainFragment) fm.findFragmentById(R.id.mainPane);
         }
 
-
-        Button playButton = (Button) findViewById(R.id.activity_mainPlayButton);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Main.this, Timeline.class);
-                startActivity(intent);
-            }
-        });
-
-        dialogTextView = (TextView) findViewById(R.id.dialogTextView);
-        initializeTimer();
-
+        slidePanel.setPanelSlideListener(panelListener);
+        slidePanel.setParallaxDistance(250);
     }
 
-    private void initializeTimer() {
+    SlidingPaneLayout.PanelSlideListener panelListener = new SlidingPaneLayout.PanelSlideListener() {
+        @Override
+        public void onPanelSlide(View panel, float slideOffset) {
 
-        timer = new Timer();
-        task = new TimerTask(){
-            @Override
-            public void run() {
-                minutes += 1000;
-
-                if (minutes >= MAXIMUM_TIME) {
-                    minutes = 0;
-                    runningIndex = (runningIndex + 1) % Const.MAIN_MESSAGES.length;
-
-                    dialogTextView.post(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            new FadeOutAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
-
-                                @Override
-                                public void onAnimationEnd(Animation animation) {
-
-                                    dialogTextView.setText("");
-
-                                    new FadeInAnimation(dialogTextView).setDuration(500).setListener(new AnimationListener() {
-                                        @Override
-                                        public void onAnimationEnd(Animation animation) {
-                                            dialogTextView.setText(Const.MAIN_MESSAGES[runningIndex]);
-                                        }
-                                    }).animate();
-                                }
-
-                            }).animate();
-
-
-                        }
-                    });
-                }
-            }
-        };
-
-        timer.scheduleAtFixedRate(task, 0, 1000);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
         }
-        return super.onOptionsItemSelected(item);
+
+        @Override
+        public void onPanelOpened(View panel) {
+
+        }
+
+        @Override
+        public void onPanelClosed(View panel) {
+
+        }
+    };
+
+    public void slidePanel() {
+        if(slidePanel.isOpen()){
+            slidePanel.closePane();
+        }
+        else{
+            slidePanel.openPane();
+        }
     }
+
 }
